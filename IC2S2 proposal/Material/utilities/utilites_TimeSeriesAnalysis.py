@@ -115,10 +115,6 @@ def plot_centroid_quiver(df_centroids):
     plt.tight_layout()
     plt.show()
 
-# Create UDF for Euclidean distance calculation
-@F.udf(DoubleType())
-def euclidean_distance(v1, v2):
-    return float(sum((a - b) ** 2 for a, b in zip(v1, v2)) ** 0.5)
 
 
 def prepare_yearly_distributions(df_bin_counts):

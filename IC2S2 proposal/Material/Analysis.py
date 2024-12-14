@@ -174,6 +174,13 @@ plot_centroid_quiver(df_centroids)
 
 
 # %% 2. Calculate distances
+
+# Create UDF for Euclidean distance calculation
+@F.udf(DoubleType())
+def euclidean_distance(v1, v2):
+    return float(sum((a - b) ** 2 for a, b in zip(v1, v2)) ** 0.5)
+
+
 df_distance = df_with_array.join(df_centroids, on='year') \
     .withColumn('distance_to_centroid', euclidean_distance('pca_array', 'centroid'))
 
